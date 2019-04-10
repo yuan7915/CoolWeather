@@ -1,8 +1,8 @@
 package com.example.admin.myapplication;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,27 +13,19 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity {
     private TextView textView;
     private Button button;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        this.textView=(TextView) findViewById(R.id.abc);
-        this.button=(Button)findViewById(R.id.btn);
-        this.button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(MainActivity.this,Main2Activity.class));
-            }
-        });
-        String weatherId="CN101010200";
-        String weatherUrl = "http://guolin.tech/api/weather?cityid=" + weatherId + "&key=284c0b03c7a247dd8fb171e45f2e0a1e";
+        setContentView(R.layout.activity_main2);
+        this.textView=(TextView)findViewById(R.id.button);
+        String weatherUrl = "http://guolin.tech/api/china";
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse( Call call, Response response) throws IOException {
                 final String responseText = response.body().string();
                 runOnUiThread(new Runnable() {
                     @Override
@@ -48,4 +40,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-}
+    }
