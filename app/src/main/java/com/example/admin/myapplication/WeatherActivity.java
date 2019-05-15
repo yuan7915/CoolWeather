@@ -1,7 +1,8 @@
 package com.example.admin.myapplication;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -12,20 +13,19 @@ import okhttp3.Response;
 
 public class WeatherActivity extends AppCompatActivity {
 
-    TextView weathertextview;
+
+    private TextView weathertextview;
+    private ArrayAdapter<Object> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weather);
-        this.weathertextview=findViewById(R.id.weathertextview);
+        setContentView(R.layout.activity_weatherctivity);
+        this.weathertextview = (TextView) findViewById(R.id.weathertextview);
         String weatherId=getIntent().getStringExtra("wid");
         String weatherUrl="http://guolin.tech/api/weather?cityid="+weatherId;
 
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseText = response.body().string();
@@ -35,6 +35,10 @@ public class WeatherActivity extends AppCompatActivity {
                         weathertextview.setText(responseText);
                     }
                 });
+            }
+
+            @Override
+            public void onFailure(Call call, IOException e) {
 
             }
         });
